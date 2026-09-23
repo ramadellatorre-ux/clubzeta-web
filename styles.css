@@ -191,18 +191,20 @@ h4{font-size:1.08rem;letter-spacing:.06em;text-transform:uppercase}
 /* ─── Secciones ─── */
 .sec{padding:var(--s12) 0;position:relative}
 .sec--azul{background:var(--azul);color:var(--crema-luz)}
-.sec--azul h2{color:var(--crema-luz)}
 .sec--noche{
   background:
     radial-gradient(900px 560px at 18% -5%,rgba(61,110,165,.28),transparent 62%),
     var(--azul-noche);
   color:var(--crema-luz);
 }
-.sec--noche h2{color:var(--crema-luz)}
 
 .sec__head{margin-bottom:var(--s8);max-width:62ch}
 .sec__head .eyebrow{margin-bottom:var(--s2)}
 .sec__head h2{color:var(--azul-noche)}
+/* Secciones de fondo oscuro: el título va en crema.
+   Especificidad (0,2,1) para ganarle a `.sec__head h2` de arriba. */
+.sec--azul .sec__head h2,
+.sec--noche .sec__head h2{color:var(--crema-luz)}
 .sec__sub{margin-top:var(--s2);font-size:1.22rem;color:rgba(20,36,58,.72)}
 .sec__sub--luz{color:var(--crema-sec)}
 
