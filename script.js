@@ -32,7 +32,7 @@ const CONFIG = {
   },
 
   paso: 30,            // grilla de horarios, en minutos
-  diasVisibles: 21,    // cuántos días hacia adelante se pueden reservar
+  diasVisibles: 14,    // cuántos días hacia adelante se pueden reservar
   margenHoras: 2,      // no se puede reservar con menos de X horas de anticipación
 
   /* ── Feriados / días cerrados (YYYY-MM-DD) ──── */
@@ -254,6 +254,8 @@ $('#slots').addEventListener('click', (ev) => {
   btn.setAttribute('aria-checked','true');
   estado.hora = btn.dataset.hora;
   ocultarError();
+  // Elegir el horario es lo último del paso 2: mostramos el botón de continuar.
+  $('.pane[data-pane="2"] .pane__nav')?.scrollIntoView({ behavior:'smooth', block:'nearest' });
 });
 
 /* ── Navegación entre pasos ── */
