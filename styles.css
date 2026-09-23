@@ -169,11 +169,7 @@ h4{font-size:1rem;letter-spacing:.06em;text-transform:uppercase}
   animation:bob 6s ease-in-out infinite;
 }
 @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
-.hero__disc img{width:100%;height:100%;object-fit:cover}
-.hero__fallback{
-  font-family:var(--display);font-weight:800;font-size:clamp(2rem,6vw,3.2rem);
-  color:var(--azul);text-align:center;line-height:1;letter-spacing:.02em;
-}
+.hero__disc img{width:94%;height:94%;object-fit:contain;object-position:center bottom}
 
 .spark{position:absolute;background:var(--azul);animation:twinkle 3.4s ease-in-out infinite}
 .spark::before,.spark::after{content:"";position:absolute;inset:0;background:inherit}
@@ -236,16 +232,19 @@ h4{font-size:1rem;letter-spacing:.06em;text-transform:uppercase}
 .note{margin-top:var(--s6);text-align:center;font-size:.95rem;color:rgba(20,36,58,.6);font-style:italic}
 
 /* ─── Barberos ─── */
-.team{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:var(--s4);max-width:760px}
-.barber{text-align:center}
-.barber__ph{
+.solo{display:grid;grid-template-columns:minmax(0,420px) 1fr;gap:var(--s8);align-items:center}
+.solo__ph{
   border-radius:var(--radio);overflow:hidden;border:3px solid var(--crema);
-  aspect-ratio:5/6;margin-bottom:var(--s3);background:var(--azul-hondo);
+  aspect-ratio:5/6;background:var(--azul-hondo);box-shadow:var(--sombra);
 }
-.barber__ph img{width:100%;height:100%;object-fit:cover;transition:transform .6s var(--trans)}
-@media(hover:hover){.barber:hover .barber__ph img{transform:scale(1.06)}}
-.barber h3{color:var(--crema-luz)}
-.barber__rol{font-size:.92rem;color:var(--crema-60);margin-bottom:6px}
+.solo__ph img{width:100%;height:100%;object-fit:cover;transition:transform .6s var(--trans)}
+@media(hover:hover){.solo__ph:hover img{transform:scale(1.06)}}
+.solo__txt h3{font-size:clamp(2rem,4vw,2.8rem);color:var(--crema-luz);margin-bottom:6px}
+.solo__rol{
+  font-family:var(--display);font-weight:700;font-size:.86rem;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--crema);margin-bottom:var(--s3);
+}
+.solo__bio{color:var(--crema-60);font-size:1.08rem;max-width:44ch;margin-bottom:var(--s3)}
 .barber__ig{font-family:var(--display);font-weight:700;color:var(--crema);border-bottom:2px solid var(--crema-60);padding-bottom:2px}
 
 /* ─── Galería ─── */
@@ -424,7 +423,8 @@ h4{font-size:1rem;letter-spacing:.06em;text-transform:uppercase}
   .gal{grid-template-columns:repeat(2,1fr);grid-auto-rows:170px}
   .gal__i--wide{grid-column:span 2}
   .gal__i--tall{grid-row:span 2}
-  .team{max-width:none}
+  .solo{grid-template-columns:1fr;gap:var(--s4);max-width:560px}
+  .solo__bio{max-width:none}
 }
 
 @media(max-width:760px){

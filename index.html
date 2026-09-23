@@ -91,14 +91,15 @@
 
     <div class="hero__art reveal">
       <div class="hero__disc">
-        <!-- EDITAR: reemplazar por el logo circular real en assets/logo-circular.png -->
-        <img src="assets/logo-circular.png" alt="Logo Club Zeta Barbería"
-             onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'hero__fallback',innerHTML:'<span>CLUB<br>ZETA</span>'}))">
+        <!-- EDITAR: recorte provisorio de la lámina de marca.
+             Reemplazar por la mascota original en PNG con fondo transparente. -->
+        <img src="assets/mascota.png" alt="Mascota de Club Zeta Barbería sosteniendo una máquina de cortar">
       </div>
       <span class="spark spark--1" aria-hidden="true"></span>
       <span class="spark spark--2" aria-hidden="true"></span>
       <span class="spark spark--3" aria-hidden="true"></span>
     </div>
+
   </div>
 </section>
 
@@ -121,43 +122,31 @@
       <p class="sec__sub">Todos los servicios incluyen lavado, toalla caliente y perfilado final.</p>
     </header>
 
-    <!-- EDITAR: confirmar precios reales con Joaco antes de publicar -->
+    <!-- EDITAR: confirmar duraciones con Joaco (los precios ya son los reales) -->
     <div class="cards">
       <article class="card reveal">
-        <div class="card__top"><h3>Corte</h3><span class="price">$12.000</span></div>
+        <div class="card__top"><h3>Corte</h3><span class="price">$17.000</span></div>
         <p>Corte a tijera o máquina, lavado y peinado. El clásico bien hecho.</p>
         <span class="chip">45 min</span>
       </article>
 
       <article class="card card--star reveal">
         <span class="card__flag">Más pedido</span>
-        <div class="card__top"><h3>Corte + Barba</h3><span class="price">$18.000</span></div>
+        <div class="card__top"><h3>Corte + Barba</h3><span class="price">$19.000</span></div>
         <p>Corte completo más perfilado de barba con navaja y toalla caliente.</p>
         <span class="chip">60 min</span>
       </article>
 
       <article class="card reveal">
-        <div class="card__top"><h3>Barba</h3><span class="price">$8.000</span></div>
-        <p>Perfilado, afeitado a navaja, toalla caliente y aceite hidratante.</p>
-        <span class="chip">30 min</span>
-      </article>
-
-      <article class="card reveal">
-        <div class="card__top"><h3>Color / Decoloración</h3><span class="price">$25.000</span></div>
-        <p>Platinado, mechas o color completo. Incluye corte y tratamiento.</p>
+        <div class="card__top"><h3>Mechas</h3><span class="price">$55.000</span></div>
+        <p>Mechas o reflejos con decoloración. Incluye corte y tratamiento post color.</p>
         <span class="chip">120 min</span>
       </article>
 
       <article class="card reveal">
-        <div class="card__top"><h3>Corte Junior</h3><span class="price">$9.000</span></div>
-        <p>Para los más chicos de la casa, hasta 12 años. Sin apuro y con paciencia.</p>
-        <span class="chip">40 min</span>
-      </article>
-
-      <article class="card reveal">
-        <div class="card__top"><h3>Diseño / Freestyle</h3><span class="price">$15.000</span></div>
-        <p>Corte con diseño a navaja, líneas y detalles a medida.</p>
-        <span class="chip">60 min</span>
+        <div class="card__top"><h3>Global</h3><span class="price">$60.000</span></div>
+        <p>Decoloración completa del pelo al tono que busques. Incluye corte y matizado.</p>
+        <span class="chip">150 min</span>
       </article>
     </div>
 
@@ -173,22 +162,23 @@
       <h2>Quién te atiende</h2>
     </header>
 
-    <!-- EDITAR: sumar/sacar barberos y reemplazar fotos reales en assets/ -->
-    <div class="team">
-      <article class="barber reveal">
-        <div class="barber__ph"><img src="https://picsum.photos/seed/zeta-joaco/600/720" alt="Joaco, barbero de Club Zeta" loading="lazy"></div>
-        <h3>Joaco</h3>
-        <p class="barber__rol">Fundador · Fade &amp; diseño</p>
-        <a class="barber__ig" href="https://www.instagram.com/joacozeta" target="_blank" rel="noopener">@joacozeta</a>
-      </article>
+    <div class="solo">
+      <div class="solo__ph reveal">
+        <!-- EDITAR: reemplazar por una foto real de Joaco en assets/ -->
+        <img src="https://picsum.photos/seed/zeta-joaco/700/840" alt="Joaco, barbero y fundador de Club Zeta" loading="lazy">
+      </div>
 
-      <article class="barber reveal">
-        <div class="barber__ph"><img src="https://picsum.photos/seed/zeta-2/600/720" alt="Barbero de Club Zeta" loading="lazy"></div>
-        <h3>Nombre 2</h3>
-        <p class="barber__rol">Barbero · Color &amp; barba</p>
-        <a class="barber__ig" href="https://www.instagram.com/clubzeta_" target="_blank" rel="noopener">@clubzeta_</a>
-      </article>
+      <div class="solo__txt reveal">
+        <h3>Joaco Zeta</h3>
+        <p class="solo__rol">Fundador · Fade, barba y color</p>
+        <p class="solo__bio">
+          Detrás de cada corte del club está Joaco. Atiende con turno, sin apuro y sin cola en la vereda:
+          un cliente por vez, el tiempo que haga falta para que salgas como querías.
+        </p>
+        <a class="barber__ig" href="https://www.instagram.com/joacozeta" target="_blank" rel="noopener">@joacozeta</a>
+      </div>
     </div>
+
   </div>
 </section>
 

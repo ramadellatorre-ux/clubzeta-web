@@ -67,7 +67,7 @@ Las fotos son placeholders de `picsum.photos` — reemplazar por fotos reales en
 ### Archivos que faltan en `assets/`
 | Archivo | Qué es |
 |---|---|
-| `logo-circular.png` | Logo circular del hero (si falta, cae a un fallback de texto) |
+| `mascota.png` | **Provisorio.** Hoy es un recorte de la lámina de marca y arrastra restos de las letras. Reemplazar por el PNG original con fondo transparente. |
 | `favicon.png` | Ícono de la pestaña, 64×64 |
 | `og.jpg` | Imagen para compartir en WhatsApp/redes, 1200×630 |
 

@@ -38,21 +38,19 @@ const CONFIG = {
   /* ── Feriados / días cerrados (YYYY-MM-DD) ──── */
   cerrado: [],
 
-  /* ── Servicios ── EDITAR precios y duraciones ── */
+  /* ── Servicios ── EDITAR duraciones ── */
   servicios: [
-    { id:'corte',     nombre:'Corte',                precio:12000, min:45,  desc:'Tijera o máquina + lavado' },
-    { id:'corte-barba',nombre:'Corte + Barba',       precio:18000, min:60,  desc:'El combo completo', destacado:true },
-    { id:'barba',     nombre:'Barba',                precio:8000,  min:30,  desc:'Navaja y toalla caliente' },
-    { id:'color',     nombre:'Color / Decoloración', precio:25000, min:120, desc:'Incluye corte' },
-    { id:'junior',    nombre:'Corte Junior',         precio:9000,  min:40,  desc:'Hasta 12 años' },
-    { id:'diseno',    nombre:'Diseño / Freestyle',   precio:15000, min:60,  desc:'Líneas y detalles' },
+    { id:'corte',      nombre:'Corte',         precio:17000, min:45,  desc:'Tijera o máquina + lavado' },
+    { id:'corte-barba',nombre:'Corte + Barba', precio:19000, min:60,  desc:'El combo completo', destacado:true },
+    { id:'mechas',     nombre:'Mechas',        precio:55000, min:120, desc:'Incluye corte' },
+    { id:'global',     nombre:'Global',        precio:60000, min:150, desc:'Decoloración completa' },
   ],
 
-  /* ── Barberos ── EDITAR ──────────────────────── */
+  /* ── Barberos ──────────────────────────────────
+     Con un solo barbero, el paso "¿Con quién?" se
+     oculta solo y queda preseleccionado.           */
   barberos: [
-    { id:'joaco',     nombre:'Joaco',      desc:'Fade & diseño' },
-    { id:'barbero-2', nombre:'Nombre 2',   desc:'Color & barba' },
-    { id:'cualquiera',nombre:'Me da igual',desc:'El primero libre' },
+    { id:'joaco', nombre:'Joaco Zeta', desc:'Fade, barba y color' },
   ],
 };
 
@@ -123,6 +121,14 @@ function pintarOpciones() {
       <span><b>${s.nombre}</b><small>${s.desc} · ${s.min} min</small></span>
       <i>${aPesos(s.precio)}</i>
     </button>`).join('');
+
+  // Un solo barbero → no tiene sentido preguntar; lo damos por elegido.
+  if (CONFIG.barberos.length < 2) {
+    estado.barbero = CONFIG.barberos[0];
+    $('#optBarberos').hidden = true;
+    $('#optBarberos').previousElementSibling.hidden = true;
+    return;
+  }
 
   $('#optBarberos').innerHTML = CONFIG.barberos.map(b => `
     <button type="button" class="opt" role="radio" aria-checked="false" data-tipo="barbero" data-id="${b.id}">
@@ -380,7 +386,8 @@ function exito(t) {
 
 $('#okReset').addEventListener('click', () => {
   form.reset();
-  Object.assign(estado, { servicio:null, barbero:null, fecha:null, hora:null, paso:1 });
+  Object.assign(estado, { servicio:null, fecha:null, hora:null, paso:1 });
+  if (CONFIG.barberos.length >= 2) estado.barbero = null;
   $$('.opt,.day,.slot').forEach(e => { e.classList.remove('is-sel'); e.setAttribute('aria-checked','false'); });
   $('#slots').innerHTML = '<p class="slots__msg">Elegí un día para ver los horarios.</p>';
   const btn = $('#btnSubmit');
