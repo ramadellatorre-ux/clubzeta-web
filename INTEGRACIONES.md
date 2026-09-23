@@ -2,7 +2,7 @@
 
 ## Sistema de turnos → Google Calendar + Google Sheets
 
-**Workflow:** `workflows/club-zeta-turnos/workflow.json`
+**Workflow:** `../automatizacion/workflow.json`
 
 ### Cómo funciona
 
@@ -24,7 +24,7 @@ Formulario de la web
 ### Conectar (4 pasos)
 
 **1 — Importar el workflow en n8n**
-Workflows → Import from file → `workflows/club-zeta-turnos/workflow.json`
+Workflows → Import from file → `../automatizacion/workflow.json`
 
 **2 — Configurar credenciales**
 Cada nodo de Google tiene `"id": "REEMPLAZAR"`. Al abrirlo, seleccionar la credencial real:
