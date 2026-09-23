@@ -277,7 +277,8 @@ h4{font-size:1.08rem;letter-spacing:.06em;text-transform:uppercase}
 .steps__i.is-done{color:#7FA8D4}
 .steps__i.is-done span{background:var(--azul);color:var(--crema-luz);border-color:var(--azul)}
 
-.pane{display:none;border:none;animation:fadeUp .45s var(--trans)}
+.book form{min-width:0}
+.pane{display:none;border:none;min-width:0;animation:fadeUp .45s var(--trans)}
 .pane.is-on{display:block}
 @keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
 
@@ -301,7 +302,15 @@ h4{font-size:1.08rem;letter-spacing:.06em;text-transform:uppercase}
 .opt.is-sel{border-color:var(--crema);background:rgba(247,232,204,.22);box-shadow:0 0 0 4px rgba(247,232,204,.14)}
 @media(hover:hover){.opt:hover{border-color:var(--crema-sec);transform:translateY(-2px)}}
 
-.days{display:flex;gap:10px;overflow-x:auto;padding-bottom:10px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}
+.days{
+  display:flex;gap:10px;overflow-x:auto;overscroll-behavior-x:contain;
+  padding-bottom:14px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;
+  scrollbar-width:thin;scrollbar-color:rgba(247,232,204,.45) rgba(255,255,255,.07);
+}
+.days::-webkit-scrollbar{height:9px}
+.days::-webkit-scrollbar-track{background:rgba(255,255,255,.07);border-radius:5px}
+.days::-webkit-scrollbar-thumb{background:rgba(247,232,204,.45);border-radius:5px}
+.days::-webkit-scrollbar-thumb:hover{background:rgba(247,232,204,.7)}
 .day{
   flex:none;width:100px;min-height:108px;scroll-snap-align:start;
   background:rgba(255,255,255,.1);border:2px solid rgba(247,232,204,.42);color:var(--crema-luz);

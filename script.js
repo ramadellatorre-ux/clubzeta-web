@@ -295,7 +295,13 @@ $$('[data-next]').forEach(b => b.addEventListener('click', () => {
     if (!estado.servicio) return mostrarError('Elegí qué servicio querés.');
     if (!estado.barbero)  return mostrarError('Elegí con qué barbero te querés atender.');
     ocultarError();
-    pintarSlots();
+    // Sin día elegido el bloque de horarios queda vacío: arrancamos en el primero abierto.
+    if (!estado.fecha) {
+      const primero = $$('.day').find(d => !d.disabled);
+      if (primero) primero.click();
+    } else {
+      pintarSlots();
+    }
   }
 
   if (destino === 3) {
