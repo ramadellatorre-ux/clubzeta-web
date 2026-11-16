@@ -153,7 +153,9 @@ h4{font-size:1.08rem;letter-spacing:.06em;text-transform:uppercase}
 }
 .h1__kicker::before{content:"";flex:none;width:44px;height:4px;border-radius:2px;background:currentColor}
 .lead strong{color:var(--azul-noche);font-weight:600}
-.hero h1{color:var(--azul-noche);margin-bottom:var(--s3)}
+.hero h1{color:var(--azul-noche);margin-bottom:var(--s3);font-size:clamp(3rem,5.6vw,5.3rem)}
+.h1__l{white-space:nowrap}
+.br-m{display:none}
 .hl{
   color:var(--azul);position:relative;display:inline-block;
 }
@@ -602,7 +604,9 @@ h4{font-size:1.08rem;letter-spacing:.06em;text-transform:uppercase}
   .hero__grid{gap:var(--s4)}
   .h1__kicker{font-size:.82rem;letter-spacing:.14em;margin-bottom:var(--s2)}
   .h1__kicker::before{display:none}
-  .hero h1{margin-bottom:var(--s2)}
+  .hero h1{margin-bottom:var(--s2);font-size:clamp(2.5rem,11.5vw,3.6rem)}
+  .h1__l{white-space:normal}
+  .br-m{display:inline}   /* en mobile: «Entrás por / un corte, / te quedás / por el club.» */
   .lead{font-size:1.08rem;margin-bottom:var(--s3)}
   .hero__cta{flex-direction:column;align-items:stretch;gap:12px;margin-bottom:var(--s4)}
   .hero__cta .btn{width:100%;min-height:56px;padding:14px 24px;font-size:1.12rem}
