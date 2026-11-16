@@ -445,6 +445,7 @@ h4{font-size:1.08rem;letter-spacing:.06em;text-transform:uppercase}
 .foot__p{margin-top:var(--s3);font-size:1.08rem}
 .foot h4{color:var(--crema);margin-bottom:var(--s3)}
 .foot__grid div a,.foot__hr{display:block;padding:7px 0;font-size:1.08rem;transition:color var(--trans)}
+.foot__grid div a.brand{display:inline-flex}
 @media(hover:hover){.foot__grid div a:hover{color:var(--crema)}}
 .foot__bar{
   border-top:1px solid rgba(247,232,204,.14);padding:var(--s3) 0;
@@ -463,6 +464,9 @@ h4{font-size:1.08rem;letter-spacing:.06em;text-transform:uppercase}
 .wa svg{width:34px;height:34px}
 @media(hover:hover){.wa:hover{transform:scale(1.1)}}
 
+/* ─── Barra fija de reserva (solo mobile) ─── */
+.mbar{display:none}
+
 /* ─── Reveal ─── */
 .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s var(--trans),transform .7s var(--trans)}
 .reveal.is-in{opacity:1;transform:none}
@@ -473,7 +477,6 @@ h4{font-size:1.08rem;letter-spacing:.06em;text-transform:uppercase}
   .hero__copy .eyebrow,.h1__kicker{justify-content:center}
   .lead{margin-inline:auto}
   .hero__cta,.hero__facts{justify-content:center}
-  .hero__art{order:-1}
   .visit{grid-template-columns:1fr;gap:var(--s6)}
   .foot__grid{grid-template-columns:1fr 1fr;gap:var(--s6)}
   .gal{grid-template-columns:repeat(2,1fr);grid-auto-rows:170px}
@@ -525,6 +528,77 @@ h4{font-size:1.08rem;letter-spacing:.06em;text-transform:uppercase}
   .foot__bar{flex-direction:column;text-align:center}
   .hero__facts{gap:var(--s3)}
   .visit__map{aspect-ratio:1}
+
+  /* ── Mobile-first: lo que importa arriba ── */
+  html{scroll-padding-top:80px}
+  .nav__inner{height:68px}
+  .brand__pole{height:36px;width:14px}
+  .nav__links{inset:68px 0 auto;max-height:calc(100dvh - 68px);overflow-y:auto}
+
+  /* Hero: H1 + botón de reserva visibles sin scrollear; la foto va después */
+  .hero{padding:calc(68px + var(--s4)) 0 var(--s6)}
+  .hero__grid{gap:var(--s4)}
+  .h1__kicker{font-size:.82rem;letter-spacing:.14em;margin-bottom:var(--s2)}
+  .h1__kicker::before{display:none}
+  .hero h1{margin-bottom:var(--s2)}
+  .lead{font-size:1.08rem;margin-bottom:var(--s3)}
+  .hero__cta{flex-direction:column;align-items:stretch;gap:12px;margin-bottom:var(--s4)}
+  .hero__cta .btn{width:100%;min-height:56px;padding:14px 24px;font-size:1.12rem}
+  .hero__facts{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding-top:var(--s2)}
+  .hero__facts strong{font-size:1.02rem}
+  .hero__facts span{font-size:.72rem;letter-spacing:.06em}
+  .hero__photo{width:100%;aspect-ratio:4/3;border-radius:200px 200px var(--radio) var(--radio)}
+  .hero__photo img{object-position:center 58%}
+  .hero__sticker{width:96px;left:-4px;bottom:-14px;border-width:3px}
+  .hero__badge{right:8px;top:auto;bottom:16px;font-size:.88rem;padding:8px 14px}
+  .spark{display:none}
+
+  /* Precios: tarjetas compactas (nombre y precio en la misma línea) */
+  .cards{gap:var(--s2)}
+  .card{padding:var(--s3) var(--s3) 20px;gap:10px}
+  .card__top{flex-direction:row;justify-content:space-between;align-items:baseline;gap:12px}
+  .card h3{font-size:1.3rem}
+  .price{font-size:1.5rem}
+  .card p{font-size:1rem}
+  .card__flag{top:-12px;left:var(--s3)}
+  .note{margin-top:var(--s4);font-size:.98rem}
+
+  /* Turnos: días en 4 columnas, más bajos, para llegar rápido a los horarios */
+  .days{grid-template-columns:repeat(4,1fr);gap:8px}
+  .day{min-height:76px;padding:8px 4px}
+  .day b{font-size:1.6rem}
+  .day u,.day s{font-size:.72rem;letter-spacing:.08em}
+  .slots{grid-template-columns:repeat(3,1fr);gap:8px}
+
+  /* Áreas táctiles de 44px en links sueltos */
+  .barber__ig{display:inline-block;padding:10px 0}
+  .fallback a,.info a{display:inline-block;padding:10px 2px}
+  .foot__bar a{display:inline-block;padding:10px 0;border-bottom:0;text-decoration:underline;text-underline-offset:4px}
+
+  /* Barra fija abajo: reservar + WhatsApp siempre a mano */
+  .wa{display:none}
+  .mbar{
+    display:flex;gap:10px;position:fixed;left:0;right:0;bottom:0;z-index:85;
+    padding:10px 4vw calc(10px + env(safe-area-inset-bottom));
+    background:rgba(253,246,232,.94);backdrop-filter:blur(12px);
+    border-top:1px solid var(--linea);box-shadow:0 -10px 30px -20px rgba(19,41,63,.6);
+    transition:transform var(--trans);
+  }
+  .mbar.is-off{transform:translateY(110%)}
+  .mbar__btn{flex:1;min-height:52px;font-size:1.08rem;padding:12px 18px}
+  .mbar__wa{
+    flex:none;width:52px;height:52px;border-radius:50%;background:#25D366;color:#fff;
+    display:grid;place-items:center;
+  }
+  .mbar__wa svg{width:28px;height:28px}
+  body{padding-bottom:calc(76px + env(safe-area-inset-bottom))}
+}
+
+@media(max-width:360px){
+  h1{font-size:2.55rem}
+  .hero__facts span{font-size:.66rem}
+  .card__top{flex-direction:column;gap:2px}
+  .days{grid-template-columns:repeat(3,1fr)}
 }
 
 @media(prefers-reduced-motion:reduce){

@@ -441,6 +441,13 @@ pintarOpciones();
 pintarDias();
 $('#slots').innerHTML = '<p class="slots__msg">Elegí un día para ver los horarios.</p>';
 
+/* ── Barra de reserva mobile: se esconde cuando ya estás reservando ── */
+const mbar = $('#mbar');
+if (mbar) {
+  new IntersectionObserver(([e]) => mbar.classList.toggle('is-off', e.isIntersecting), { threshold: 0.05 })
+    .observe($('#turnos'));
+}
+
 /* ── Videos de cortes: se reproducen solo cuando están en pantalla ── */
 const reducir = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const obsVid = new IntersectionObserver((entradas) => {
