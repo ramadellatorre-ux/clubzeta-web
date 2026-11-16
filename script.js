@@ -447,3 +447,13 @@ if (mbar) {
   new IntersectionObserver(([e]) => mbar.classList.toggle('is-off', e.isIntersecting), { threshold: 0.05 })
     .observe($('#turnos'));
 }
+
+/* ── Videos de cortes: se reproducen (en cámara lenta) solo cuando están en pantalla ── */
+const reducir = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const obsVid = new IntersectionObserver((entradas) => {
+  entradas.forEach(({ target: v, isIntersecting }) => {
+    if (isIntersecting && !reducir) { v.preload = 'auto'; v.play().catch(() => {}); }
+    else v.pause();
+  });
+}, { threshold: 0.5 });
+$$('.reel video').forEach(v => obsVid.observe(v));
