@@ -116,7 +116,7 @@ const elErr = $('#formErr');
 function pintarOpciones() {
   $('#optServicios').innerHTML = CONFIG.servicios.map(s => `
     <button type="button" class="opt" role="radio" aria-checked="false" data-tipo="servicio" data-id="${s.id}">
-      <span><b>${s.nombre}</b><small>${s.desc} · ${s.min} min</small></span>
+      <span><b>${s.nombre}</b><small>${s.desc}</small></span>
       <i>${aPesos(s.precio)}</i>
     </button>`).join('');
 
@@ -291,7 +291,7 @@ function pintarElegido() {
   const s = estado.servicio;
   if (!s) return;
   $('#elegido').innerHTML = `
-    <span><b>${s.nombre}</b> · ${s.min} min · ${aPesos(s.precio)}</span>
+    <span><b>${s.nombre}</b> · ${aPesos(s.precio)}</span>
     <button type="button" class="elegido__cambiar" data-ir="1">Cambiar</button>`;
 }
 
@@ -344,7 +344,6 @@ function pintarResumen() {
     <div><span>Barbero</span><span>${estado.barbero.nombre}</span></div>
     <div><span>Día</span><span>${fechaLinda(estado.fecha)}</span></div>
     <div><span>Hora</span><span>${estado.hora} hs</span></div>
-    <div><span>Duración</span><span>${estado.servicio.min} min</span></div>
     <div><span>Precio</span><span>${aPesos(estado.servicio.precio)}</span></div>`;
 }
 
