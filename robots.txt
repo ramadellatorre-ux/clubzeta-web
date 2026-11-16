@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://ramadellatorre-ux.github.io/clubzeta-web/sitemap.xml

@@ -1,17 +1,29 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es-AR">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Club Zeta Barbería · Turnos online en Colegiales, CABA</title>
-<meta name="description" content="Barbería en Colegiales, CABA. Cortes, fade, barba y color. Reservá tu turno online en 30 segundos. Freire 1015. Lunes a sábados de 13 a 20hs.">
+<!-- EDITAR: cuando haya dominio propio, cambiar https://ramadellatorre-ux.github.io/clubzeta-web/ en canonical, og:url, og:image, JSON-LD, robots.txt y sitemap.xml -->
+<title>Barbería en Colegiales, CABA | Club Zeta · Fade, barba y turnos online</title>
+<meta name="description" content="Barbería en Colegiales (Freire 1015, CABA). Cortes de pelo para hombre, fade, barba y color. Mirá cortes reales y reservá tu turno online. Lun a sáb 13 a 20 hs.">
+<link rel="canonical" href="https://ramadellatorre-ux.github.io/clubzeta-web/">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="geo.region" content="AR-C">
+<meta name="geo.placename" content="Colegiales, Buenos Aires">
 <meta name="theme-color" content="#3D6EA5">
 
 <meta property="og:type" content="website">
-<meta property="og:title" content="Club Zeta Barbería · Turnos online en Colegiales">
-<meta property="og:description" content="Cortes, fade, barba y color en Colegiales, CABA. Reservá tu turno online en 30 segundos.">
-<meta property="og:image" content="assets/og.jpg">
+<meta property="og:url" content="https://ramadellatorre-ux.github.io/clubzeta-web/">
+<meta property="og:site_name" content="Club Zeta Barbería">
+<meta property="og:title" content="Club Zeta · Barbería en Colegiales, CABA">
+<meta property="og:description" content="Cortes de pelo para hombre, fade, barba y color en Freire 1015, Colegiales. Reservá tu turno online.">
+<meta property="og:image" content="https://ramadellatorre-ux.github.io/clubzeta-web/assets/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Interior de Club Zeta Barbería en Colegiales">
 <meta property="og:locale" content="es_AR">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" as="image" href="assets/local/sillones.webp" fetchpriority="high">
 
 <link rel="icon" href="assets/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -23,23 +35,52 @@
 {
   "@context": "https://schema.org",
   "@type": "HairSalon",
+  "@id": "https://ramadellatorre-ux.github.io/clubzeta-web/#barberia",
   "name": "Club Zeta Barbería",
-  "image": "assets/og.jpg",
-  "url": "https://clubzeta.com.ar",
+  "description": "Barbería en Colegiales, CABA. Cortes de pelo para hombre, fade, barba, mechas y decoloración global, con turnos online.",
+  "url": "https://ramadellatorre-ux.github.io/clubzeta-web/",
+  "logo": "https://ramadellatorre-ux.github.io/clubzeta-web/assets/mascota.png",
+  "image": [
+    "https://ramadellatorre-ux.github.io/clubzeta-web/assets/og.jpg",
+    "https://ramadellatorre-ux.github.io/clubzeta-web/assets/local/sillones.webp",
+    "https://ramadellatorre-ux.github.io/clubzeta-web/assets/local/fachada.webp",
+    "https://ramadellatorre-ux.github.io/clubzeta-web/assets/local/living.webp"
+  ],
   "telephone": "+5491125997840",
-  "priceRange": "$$",
+  "priceRange": "$17.000 - $60.000",
+  "currenciesAccepted": "ARS",
+  "paymentAccepted": "Efectivo, transferencia, débito",
   "address": {
     "@type": "PostalAddress",
     "streetAddress": "Freire 1015",
-    "addressLocality": "Colegiales, Ciudad Autónoma de Buenos Aires",
+    "addressLocality": "Colegiales",
+    "addressRegion": "Ciudad Autónoma de Buenos Aires",
     "addressCountry": "AR"
   },
+  "areaServed": ["Colegiales", "Belgrano", "Palermo", "Chacarita", "Villa Ortúzar"],
+  "hasMap": "https://maps.google.com/?q=Freire+1015,+Colegiales,+CABA",
   "openingHoursSpecification": [{
     "@type": "OpeningHoursSpecification",
     "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
     "opens": "13:00",
     "closes": "20:00"
   }],
+  "founder": {"@type": "Person", "name": "Joaquín «Joaco»", "jobTitle": "Barbero", "sameAs": "https://www.instagram.com/joacozeta"},
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Servicios de barbería",
+    "itemListElement": [
+      {"@type":"Offer","price":"17000","priceCurrency":"ARS","itemOffered":{"@type":"Service","name":"Corte de pelo"}},
+      {"@type":"Offer","price":"19000","priceCurrency":"ARS","itemOffered":{"@type":"Service","name":"Corte + barba"}},
+      {"@type":"Offer","price":"55000","priceCurrency":"ARS","itemOffered":{"@type":"Service","name":"Mechas"}},
+      {"@type":"Offer","price":"60000","priceCurrency":"ARS","itemOffered":{"@type":"Service","name":"Decoloración global"}}
+    ]
+  },
+  "potentialAction": {
+    "@type": "ReserveAction",
+    "target": "https://ramadellatorre-ux.github.io/clubzeta-web/#turnos",
+    "name": "Reservar turno online"
+  },
   "sameAs": ["https://www.instagram.com/clubzeta_"]
 }
 </script>
@@ -76,9 +117,11 @@
   <div class="hero__glow" aria-hidden="true"></div>
   <div class="wrap hero__grid">
     <div class="hero__copy">
-      <p class="eyebrow reveal">Colegiales · CABA</p>
-      <h1 class="reveal">Tu corte,<br><span class="hl">sin esperar</span><br>en la puerta.</h1>
-      <p class="lead reveal">Barbería de barrio con laburo de estudio. Elegís servicio, barbero y horario — y el turno te queda agendado al toque.</p>
+      <h1 class="reveal">
+        <span class="h1__kicker">Barbería en Colegiales, CABA</span>
+        Tu corte,<br><span class="hl">sin esperar</span><br>en la puerta.
+      </h1>
+      <p class="lead reveal">Cortes de pelo para hombre, <strong>fade</strong>, <strong>barba</strong> y <strong>color</strong> en Freire 1015. Mirá cortes reales y reservá tu turno online: elegís servicio, barbero y horario, y listo.</p>
       <div class="hero__cta reveal">
         <a href="#turnos" class="btn btn--azul btn--lg">Reservar mi turno</a>
         <a href="#servicios" class="btn btn--ghost btn--lg">Ver precios</a>
@@ -92,7 +135,7 @@
 
     <div class="hero__art reveal">
       <figure class="hero__photo">
-        <img src="assets/local/sillones.webp" alt="Sillones de Club Zeta con las capas de la barbería, frente a la pared azul" width="1000" height="1333" fetchpriority="high">
+        <img src="assets/local/sillones.webp" alt="Interior de Club Zeta, barbería en Colegiales: sillones de corte con capas de la marca y pared azul" width="1000" height="1333" fetchpriority="high">
       </figure>
       <div class="hero__sticker">
         <img src="assets/mascota.png" alt="Mascota de Club Zeta Barbería">
@@ -121,14 +164,14 @@
   <div class="wrap">
     <header class="sec__head reveal">
       <p class="eyebrow">Carta</p>
-      <h2>Servicios y precios</h2>
-      <p class="sec__sub">Todos los servicios incluyen lavado, toalla caliente y perfilado final.</p>
+      <h2>Servicios y precios de la barbería</h2>
+      <p class="sec__sub">Corte de pelo, barba, mechas y decoloración en Colegiales. Todos los servicios incluyen lavado, toalla caliente y perfilado final.</p>
     </header>
 
     <!-- EDITAR: confirmar duraciones con Joaco (los precios ya son los reales) -->
     <div class="cards">
       <article class="card reveal">
-        <div class="card__top"><h3>Corte</h3><span class="price">$17.000</span></div>
+        <div class="card__top"><h3>Corte de pelo</h3><span class="price">$17.000</span></div>
         <p>Corte a tijera o máquina, lavado y peinado. El clásico bien hecho.</p>
         <span class="chip">45 min</span>
       </article>
@@ -147,7 +190,7 @@
       </article>
 
       <article class="card reveal">
-        <div class="card__top"><h3>Global</h3><span class="price">$60.000</span></div>
+        <div class="card__top"><h3>Global (decoloración)</h3><span class="price">$60.000</span></div>
         <p>Decoloración completa del pelo al tono que busques. Incluye corte y matizado.</p>
         <span class="chip">150 min</span>
       </article>
@@ -162,8 +205,8 @@
   <div class="wrap">
     <header class="sec__head reveal">
       <p class="eyebrow eyebrow--luz">Recién salidos de la silla</p>
-      <h2>Así salen del club</h2>
-      <p class="sec__sub sec__sub--luz">Clientes reales, filmados en el local al terminar. Sin filtros ni retoques.</p>
+      <h2>Cortes de pelo reales: así salen del club</h2>
+      <p class="sec__sub sec__sub--luz">Fade, taper, textura y diseños hechos en nuestra barbería de Colegiales. Clientes reales, filmados al terminar, sin filtros ni retoques.</p>
     </header>
 
     <div class="reels">
@@ -200,7 +243,7 @@
   <div class="wrap">
     <header class="sec__head reveal">
       <p class="eyebrow eyebrow--luz">El equipo</p>
-      <h2>Quién te atiende</h2>
+      <h2>Tu barbero en Colegiales</h2>
     </header>
 
     <div class="solo">
@@ -212,7 +255,7 @@
         <h3>Joaco Zeta</h3>
         <p class="solo__rol">Fundador · Fade, barba y color</p>
         <p class="solo__bio">
-          Detrás de cada corte del club está Joaco. Atiende con turno, sin apuro y sin cola en la vereda:
+          Detrás de cada corte del club está Joaquín, «Joaco». Especialista en fade, barba y color, atiende con turno, sin apuro y sin cola en la vereda:
           un cliente por vez, el tiempo que haga falta para que salgas como querías.
         </p>
         <a class="barber__ig" href="https://www.instagram.com/joacozeta" target="_blank" rel="noopener">@joacozeta</a>
@@ -227,8 +270,8 @@
   <div class="wrap">
     <header class="sec__head reveal">
       <p class="eyebrow">El local</p>
-      <h2>El club por dentro</h2>
-      <p class="sec__sub">Sillón Chesterfield, tragamonedas, arcade y café mientras esperás. Venir a cortarte también es un plan.</p>
+      <h2>La barbería por dentro</h2>
+      <p class="sec__sub">Un local en Colegiales con sillón Chesterfield, tragamonedas, arcade y café mientras esperás. Venir a cortarte también es un plan.</p>
     </header>
 
     <div class="gal">
@@ -251,7 +294,7 @@
   <div class="wrap wrap--slim">
     <header class="sec__head reveal">
       <p class="eyebrow eyebrow--luz">Reservá</p>
-      <h2>Pedí tu turno</h2>
+      <h2>Pedí tu turno online</h2>
       <p class="sec__sub sec__sub--luz">Tres pasos y listo. Te llega la confirmación y el barbero lo recibe en su agenda al instante.</p>
     </header>
 
@@ -352,6 +395,58 @@
   </div>
 </section>
 
+<!-- ══════════ PREGUNTAS FRECUENTES ══════════ -->
+<section class="sec" id="preguntas">
+  <div class="wrap wrap--slim">
+    <header class="sec__head reveal">
+      <p class="eyebrow">Dudas</p>
+      <h2>Preguntas frecuentes</h2>
+    </header>
+
+    <div class="faq">
+      <details class="faq__i reveal">
+        <summary>¿Dónde queda Club Zeta Barbería?</summary>
+        <p>En Freire 1015, Colegiales (CABA), a 5 cuadras de la estación Colegiales. Quedamos cerca de Belgrano, Palermo y Chacarita.</p>
+      </details>
+      <details class="faq__i reveal">
+        <summary>¿Cómo saco turno?</summary>
+        <p>Desde esta misma web, en la sección <a href="#turnos">Pedí tu turno online</a>: elegís servicio, barbero, día y horario. También podés escribirnos por <a href="https://wa.me/5491125997840" target="_blank" rel="noopener">WhatsApp</a> o por Instagram.</p>
+      </details>
+      <details class="faq__i reveal">
+        <summary>¿Cuánto sale un corte de pelo?</summary>
+        <p>El corte de pelo cuesta $17.000 y el corte + barba $19.000. Mechas $55.000 y decoloración global $60.000. Todos incluyen lavado, toalla caliente y perfilado.</p>
+      </details>
+      <details class="faq__i reveal">
+        <summary>¿Qué días y horarios abren?</summary>
+        <p>De lunes a sábados de 13 a 20 hs. Los domingos está cerrado.</p>
+      </details>
+      <details class="faq__i reveal">
+        <summary>¿Qué medios de pago aceptan?</summary>
+        <p>Efectivo, transferencia y débito.</p>
+      </details>
+      <details class="faq__i reveal">
+        <summary>¿Y si no puedo ir al turno?</summary>
+        <p>Avisanos con al menos 2 horas de anticipación por WhatsApp así le liberamos el horario a otra persona.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type":"Question","name":"¿Dónde queda Club Zeta Barbería?","acceptedAnswer":{"@type":"Answer","text":"En Freire 1015, Colegiales (CABA), a 5 cuadras de la estación Colegiales. Cerca de Belgrano, Palermo y Chacarita."}},
+    {"@type":"Question","name":"¿Cómo saco turno?","acceptedAnswer":{"@type":"Answer","text":"Desde la web, eligiendo servicio, barbero, día y horario. También por WhatsApp al +54 9 11 2599 7840 o por Instagram @clubzeta_."}},
+    {"@type":"Question","name":"¿Cuánto sale un corte de pelo?","acceptedAnswer":{"@type":"Answer","text":"El corte de pelo cuesta $17.000 y el corte + barba $19.000. Mechas $55.000 y decoloración global $60.000."}},
+    {"@type":"Question","name":"¿Qué días y horarios abren?","acceptedAnswer":{"@type":"Answer","text":"De lunes a sábados de 13 a 20 hs. Domingos cerrado."}},
+    {"@type":"Question","name":"¿Qué medios de pago aceptan?","acceptedAnswer":{"@type":"Answer","text":"Efectivo, transferencia y débito."}},
+    {"@type":"Question","name":"¿Y si no puedo ir al turno?","acceptedAnswer":{"@type":"Answer","text":"Avisá con al menos 2 horas de anticipación por WhatsApp."}}
+  ]
+}
+</script>
+
 <!-- ══════════ VISITANOS ══════════ -->
 <section class="sec" id="visitanos">
   <div class="wrap visit">
@@ -364,6 +459,7 @@
         <li><strong>WhatsApp</strong><span><a href="https://wa.me/5491125997840" target="_blank" rel="noopener">+54 9 11 2599 7840</a></span></li>
         <li><strong>Instagram</strong><span><a href="https://www.instagram.com/clubzeta_" target="_blank" rel="noopener">@clubzeta_</a></span></li>
         <li><strong>Cómo llegar</strong><span>A 5 cuadras de la estación Colegiales.<br>Colectivos 39, 42, 44, 63, 68, 108, 168.</span></li>
+        <li><strong>Cerca de</strong><span>Belgrano, Palermo, Chacarita y Villa Ortúzar.</span></li>
       </ul>
 
       <a class="btn btn--azul" href="https://maps.google.com/?q=Freire+1015,+Colegiales,+CABA" target="_blank" rel="noopener">Abrir en Google Maps</a>
@@ -388,7 +484,7 @@
         <span class="brand__pole" aria-hidden="true"></span>
         <span class="brand__txt">Club&nbsp;Zeta<small>barbería</small></span>
       </a>
-      <p class="foot__p">Barbería en Colegiales, CABA.<br>Cortes, barba, color y buena charla.</p>
+      <p class="foot__p">Barbería en Colegiales, CABA.<br>Freire 1015 · Cortes, barba, color y buena charla.</p>
     </div>
 
     <div>

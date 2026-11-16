@@ -145,6 +145,14 @@ h4{font-size:1.08rem;letter-spacing:.06em;text-transform:uppercase}
 
 .hero__grid{position:relative;z-index:1;display:grid;grid-template-columns:1.05fr .95fr;gap:var(--s8);align-items:center}
 .hero__copy .eyebrow{margin-bottom:var(--s3)}
+/* Keyword local dentro del H1, con estética de eyebrow */
+.h1__kicker{
+  display:flex;align-items:center;gap:14px;margin-bottom:var(--s3);
+  font-family:var(--body);font-weight:700;font-size:clamp(.95rem,1.6vw,1.15rem);
+  letter-spacing:.2em;text-transform:uppercase;color:var(--azul);line-height:1.3;
+}
+.h1__kicker::before{content:"";flex:none;width:44px;height:4px;border-radius:2px;background:currentColor}
+.lead strong{color:var(--azul-noche);font-weight:600}
 .hero h1{color:var(--azul-noche);margin-bottom:var(--s3)}
 .hl{
   color:var(--azul);position:relative;display:inline-block;
@@ -280,6 +288,20 @@ h4{font-size:1.08rem;letter-spacing:.06em;text-transform:uppercase}
 .gal__i--tall{grid-row:span 2}
 .gal__i--wide{grid-column:span 2}
 @media(hover:hover){.gal__i:hover img{transform:scale(1.07)}}
+
+/* ─── FAQ ─── */
+.faq{display:grid;gap:var(--s2)}
+.faq__i{background:#fff;border:2px solid var(--linea);border-radius:var(--radio-sm);transition:border-color var(--trans)}
+.faq__i[open]{border-color:var(--azul)}
+.faq__i summary{
+  list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:var(--s2);
+  padding:var(--s3);font-family:var(--display);font-weight:700;font-size:1.2rem;color:var(--azul-noche);min-height:44px;
+}
+.faq__i summary::-webkit-details-marker{display:none}
+.faq__i summary::after{content:"+";font-size:1.6rem;color:var(--azul);transition:transform var(--trans)}
+.faq__i[open] summary::after{transform:rotate(45deg)}
+.faq__i p{padding:0 var(--s3) var(--s3);color:rgba(20,36,58,.78);font-size:1.05rem}
+.faq__i a{color:var(--azul);font-weight:600;text-decoration:underline}
 
 /* ─── Booking ─── */
 .book{
@@ -448,7 +470,7 @@ h4{font-size:1.08rem;letter-spacing:.06em;text-transform:uppercase}
 /* ════════ Responsive ════════ */
 @media(max-width:980px){
   .hero__grid{grid-template-columns:1fr;gap:var(--s6);text-align:center}
-  .hero__copy .eyebrow{justify-content:center}
+  .hero__copy .eyebrow,.h1__kicker{justify-content:center}
   .lead{margin-inline:auto}
   .hero__cta,.hero__facts{justify-content:center}
   .hero__art{order:-1}
