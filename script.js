@@ -125,6 +125,7 @@ function pintarOpciones() {
     estado.barbero = CONFIG.barberos[0];
     $('#optBarberos').hidden = true;
     $('#optBarberos').previousElementSibling.hidden = true;
+    $('#nav1').hidden = true;   // elegir el servicio ya avanza solo
     return;
   }
 
@@ -144,7 +145,10 @@ document.addEventListener('click', (ev) => {
 
   if (btn.dataset.tipo === 'servicio') {
     estado.servicio = CONFIG.servicios.find(s => s.id === btn.dataset.id);
-    if (estado.fecha) pintarSlots();      // cambió la duración → recalcular
+    if (estado.fecha) { estado.hora = null; pintarSlots(); }   // cambió la duración → recalcular
+    // Con un solo barbero no hay nada más que elegir: pasamos solos al paso 2
+    // (pequeña pausa para que se vea la selección).
+    if (estado.barbero && estado.paso === 1) setTimeout(() => estado.paso === 1 && avanzar(2), 240);
   } else {
     estado.barbero = CONFIG.barberos.find(b => b.id === btn.dataset.id);
     if (estado.fecha) pintarSlots();      // otro barbero → otra disponibilidad
@@ -181,6 +185,8 @@ $('#days').addEventListener('click', (ev) => {
   estado.fecha = btn.dataset.fecha;
   estado.hora = null;
   ocultarError();
+  actualizarCTA();
+  centrarDia();
   pintarSlots();
 });
 
@@ -261,9 +267,33 @@ $('#slots').addEventListener('click', (ev) => {
   btn.setAttribute('aria-checked','true');
   estado.hora = btn.dataset.hora;
   ocultarError();
-  // Elegir el horario es lo último del paso 2: mostramos el botón de continuar.
-  $('.pane[data-pane="2"] .pane__nav')?.scrollIntoView({ behavior:'smooth', block:'nearest' });
+  actualizarCTA();   // el botón (fijo abajo en mobile) pasa a "Continuar · día y hora"
 });
+
+/* El botón del paso 2 dice qué falta o qué elegiste */
+function actualizarCTA() {
+  const b = $('#btnPaso2');
+  if (!b) return;
+  const listo = estado.fecha && estado.hora;
+  b.classList.toggle('is-dim', !listo);
+  b.textContent = listo
+    ? `Continuar · ${fechaCorta(estado.fecha)} ${estado.hora} hs`
+    : 'Elegí un horario';
+}
+
+function fechaCorta(iso) {
+  const [a, m, d] = iso.split('-').map(Number);
+  return `${DIAS[new Date(a, m - 1, d).getDay()]} ${d}`;
+}
+
+/* Resumen de lo elegido arriba del paso 2, con atajo para cambiarlo */
+function pintarElegido() {
+  const s = estado.servicio;
+  if (!s) return;
+  $('#elegido').innerHTML = `
+    <span><b>${s.nombre}</b> · ${s.min} min · ${aPesos(s.precio)}</span>
+    <button type="button" class="elegido__cambiar" data-ir="1">Cambiar</button>`;
+}
 
 /* ── Navegación entre pasos ── */
 function irA(paso) {
@@ -274,9 +304,33 @@ function irA(paso) {
     s.classList.toggle('is-on', n === paso);
     s.classList.toggle('is-done', n < paso);
   });
+  if (paso === 2) { pintarElegido(); actualizarCTA(); centrarDia(); }
   if (paso === 3) pintarResumen();
-  $('#book').scrollIntoView({ behavior:'smooth', block:'start' });
+
+  // Solo movemos la pantalla si el inicio del formulario quedó fuera de vista
+  // (evita los saltos de página en cada paso).
+  const top = $('#book').getBoundingClientRect().top;
+  if (top < 0 || top > innerHeight * 0.35) {
+    $('#book').scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block:'start' });
+  }
 }
+
+/* En mobile los días son una tira horizontal: dejamos visible el elegido */
+function centrarDia() {
+  const sel = $('.day.is-sel');
+  const tira = $('#days');
+  if (sel && tira.scrollWidth > tira.clientWidth) {
+    tira.scrollTo({ left: sel.offsetLeft - tira.clientWidth / 2 + sel.clientWidth / 2, behavior:'smooth' });
+  }
+}
+
+/* Atajos: "Cambiar" del resumen y los pasos ya hechos del encabezado */
+document.addEventListener('click', (ev) => {
+  const ir = ev.target.closest('[data-ir]');
+  if (ir) { ocultarError(); irA(Number(ir.dataset.ir)); return; }
+  const paso = ev.target.closest('.steps__i.is-done');
+  if (paso && !$('.pane--ok.is-on')) { ocultarError(); irA(Number(paso.dataset.step)); }
+});
 
 function fechaLinda(iso) {
   const [a, m, d] = iso.split('-').map(Number);
@@ -294,12 +348,15 @@ function pintarResumen() {
     <div><span>Precio</span><span>${aPesos(estado.servicio.precio)}</span></div>`;
 }
 
-function mostrarError(msg) { elErr.textContent = msg; elErr.hidden = false; }
+function mostrarError(msg, campo) {
+  elErr.textContent = msg; elErr.hidden = false;
+  if (campo) $(campo).focus({ preventScroll:false });   // lleva el cursor (y el teclado) al campo que falta
+}
 function ocultarError() { elErr.hidden = true; }
 
-$$('[data-next]').forEach(b => b.addEventListener('click', () => {
-  const destino = Number(b.dataset.next);
+$$('[data-next]').forEach(b => b.addEventListener('click', () => avanzar(Number(b.dataset.next))));
 
+function avanzar(destino) {
   if (destino === 2) {
     if (!estado.servicio) return mostrarError('Elegí qué servicio querés.');
     if (!estado.barbero)  return mostrarError('Elegí con qué barbero te querés atender.');
@@ -320,7 +377,7 @@ $$('[data-next]').forEach(b => b.addEventListener('click', () => {
   }
 
   irA(destino);
-}));
+}
 
 $$('[data-back]').forEach(b => b.addEventListener('click', () => { ocultarError(); irA(Number(b.dataset.back)); }));
 
@@ -334,9 +391,9 @@ form.addEventListener('submit', async (ev) => {
   const email  = $('#f_email').value.trim();
   const notas  = $('#f_notas').value.trim();
 
-  if (nombre.length < 3) return mostrarError('Escribí tu nombre y apellido.');
-  if (tel.replace(/\D/g, '').length < 8) return mostrarError('Dejanos un WhatsApp válido para confirmarte el turno.');
-  if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return mostrarError('Revisá el email, parece que tiene un error.');
+  if (nombre.length < 3) return mostrarError('Escribí tu nombre y apellido.', '#f_nombre');
+  if (tel.replace(/\D/g, '').length < 8) return mostrarError('Dejanos un WhatsApp válido para confirmarte el turno.', '#f_tel');
+  if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return mostrarError('Revisá el email, parece que tiene un error.', '#f_email');
 
   const inicio = `${estado.fecha}T${estado.hora}:00${CONFIG.zonaHoraria}`;
   const fin    = `${estado.fecha}T${aHora(aMin(estado.hora) + estado.servicio.min)}:00${CONFIG.zonaHoraria}`;
@@ -435,6 +492,9 @@ $('#okReset').addEventListener('click', () => {
   btn.textContent = 'Confirmar turno';
   irA(1);
 });
+
+/* Apenas empieza a corregir, el aviso de error se va */
+$$('#f_nombre,#f_tel,#f_email').forEach(i => i.addEventListener('input', ocultarError));
 
 /* ── Arranque ── */
 pintarOpciones();

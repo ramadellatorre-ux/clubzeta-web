@@ -313,15 +313,17 @@
           <p class="lbl">¿Con quién?</p>
           <div class="opts opts--row" id="optBarberos" role="radiogroup" aria-label="Barbero"></div>
 
-          <div class="pane__nav">
+          <div class="pane__nav" id="nav1">
             <span></span>
-            <button type="button" class="btn btn--crema" data-next="2">Continuar →</button>
+            <button type="button" class="btn btn--crema btn--go" data-next="2">Continuar →</button>
           </div>
         </fieldset>
 
         <!-- Paso 2 -->
         <fieldset class="pane" data-pane="2">
           <legend class="sr-only">Elegí día y horario</legend>
+
+          <div class="elegido" id="elegido"></div>
 
           <p class="lbl">Elegí el día</p>
           <div class="days" id="days" role="radiogroup" aria-label="Día"></div>
@@ -330,8 +332,8 @@
           <div class="slots" id="slots" role="radiogroup" aria-live="polite" aria-label="Horario"></div>
 
           <div class="pane__nav">
-            <button type="button" class="btn btn--ghost btn--luz" data-back="1">← Volver</button>
-            <button type="button" class="btn btn--crema" data-next="3">Continuar →</button>
+            <button type="button" class="btn btn--ghost btn--luz btn--back" data-back="1" aria-label="Volver al paso anterior">←<span> Volver</span></button>
+            <button type="button" class="btn btn--crema btn--go" data-next="3" id="btnPaso2">Elegí un horario</button>
           </div>
         </fieldset>
 
@@ -365,8 +367,8 @@
           <p class="mini">Al confirmar aceptás nuestra política de cancelación: avisanos con 2 horas de anticipación si no podés venir.</p>
 
           <div class="pane__nav">
-            <button type="button" class="btn btn--ghost btn--luz" data-back="2">← Volver</button>
-            <button type="submit" class="btn btn--crema btn--lg" id="btnSubmit">Confirmar turno</button>
+            <button type="button" class="btn btn--ghost btn--luz btn--back" data-back="2" aria-label="Volver al paso anterior">←<span> Volver</span></button>
+            <button type="submit" class="btn btn--crema btn--lg btn--go" id="btnSubmit">Confirmar turno</button>
           </div>
         </fieldset>
 

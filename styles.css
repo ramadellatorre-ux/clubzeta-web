@@ -409,6 +409,22 @@ h4{font-size:1.08rem;letter-spacing:.06em;text-transform:uppercase}
   border-top:2px solid rgba(247,232,204,.22);
 }
 .pane__nav .btn{flex:0 1 auto}
+.pane__nav[hidden]{display:none}
+.btn--go.is-dim{opacity:.6}
+.steps__i.is-done{cursor:pointer}
+
+/* Lo elegido en el paso 1, visible arriba del paso 2 */
+.elegido{
+  display:flex;align-items:center;justify-content:space-between;gap:var(--s2);
+  background:rgba(247,232,204,.1);border:1px solid rgba(247,232,204,.25);border-radius:999px;
+  padding:8px 8px 8px 20px;margin-bottom:var(--s4);color:var(--crema-sec);font-size:1rem;
+}
+.elegido:empty{display:none}
+.elegido b{color:var(--crema-luz);font-family:var(--display)}
+.elegido__cambiar{
+  flex:none;background:none;border:0;cursor:pointer;color:var(--crema);font-weight:700;
+  text-decoration:underline;text-underline-offset:4px;padding:10px 14px;min-height:44px;
+}
 
 .pane--ok{text-align:center;padding:var(--s4) 0}
 .ok__tick{
@@ -515,17 +531,61 @@ h4{font-size:1.08rem;letter-spacing:.06em;text-transform:uppercase}
 
   .sec{padding:var(--s12) 0}
   .book{padding:var(--s3) var(--s2);border-radius:var(--radio)}
-  .slots{grid-template-columns:repeat(auto-fill,minmax(92px,1fr))}
-  .slot{font-size:1.05rem;min-height:52px}
-  .days{grid-template-columns:repeat(auto-fill,minmax(88px,1fr));gap:10px}
-  .day{min-height:96px}
-  .steps__i{font-size:0;gap:0;justify-content:center}
-  .steps__i span{font-size:.9rem}
   .fields{grid-template-columns:1fr}
   .cards{grid-template-columns:1fr}
   .opts{grid-template-columns:1fr}
-  .pane__nav{flex-direction:column-reverse}
-  .pane__nav .btn{width:100%}
+
+  /* ── Reserva en mobile: como una app ── */
+  .steps{gap:8px;margin-bottom:var(--s3)}
+  .steps__i{font-size:.8rem;gap:6px;padding-bottom:10px;border-bottom-width:3px;line-height:1.15}
+  .steps__i span{width:26px;height:26px;font-size:.8rem;border-width:2px}
+  .lbl{font-size:.82rem;margin:var(--s3) 0 12px}
+  .opt{padding:16px 18px;min-height:64px}
+  .opt b{font-size:1.1rem}
+  .opt small{font-size:.88rem}
+  .opt i{font-size:1.15rem}
+  .elegido{font-size:.92rem;padding:6px 6px 6px 16px;margin-bottom:var(--s3)}
+
+  /* Días en una sola tira horizontal (antes eran 4 filas) */
+  .days{
+    display:flex;gap:8px;overflow-x:auto;scroll-snap-type:x proximity;overscroll-behavior-x:contain;
+    margin-inline:calc(-1 * var(--s2));padding:4px var(--s2) 8px;scrollbar-width:none;
+  }
+  .days::-webkit-scrollbar{display:none}
+  .day{flex:0 0 64px;min-height:78px;padding:8px 2px;scroll-snap-align:start}
+  .day b{font-size:1.55rem}
+  .day u,.day s{font-size:.7rem;letter-spacing:.06em}
+
+  /* Horarios: 4 por fila */
+  .slots{grid-template-columns:repeat(4,1fr);gap:8px}
+  .slot{min-height:48px;padding:10px 4px;font-size:1rem}
+
+  /* Botonera fija abajo de la pantalla mientras estás en el paso */
+  .pane__nav{
+    position:sticky;bottom:0;z-index:5;flex-wrap:nowrap;gap:10px;
+    margin:var(--s3) calc(-1 * var(--s2)) calc(-1 * var(--s3));
+    padding:12px var(--s2) calc(12px + env(safe-area-inset-bottom));
+    background:rgba(19,41,63,.95);backdrop-filter:blur(10px);
+    border-top:1px solid rgba(247,232,204,.22);border-radius:0 0 var(--radio) var(--radio);
+  }
+  .pane__nav > span{display:none}
+  .btn--back{flex:none !important;width:52px;min-height:52px;padding:0;font-size:1.3rem}
+  .btn--back span{display:none}
+  .btn--go{flex:1 1 auto !important;min-height:54px;padding:12px 16px;font-size:1.02rem;white-space:normal;line-height:1.2}
+  .mini{font-size:.88rem}
+  .err{
+    position:sticky;bottom:96px;z-index:6;margin-top:12px;font-size:.98rem;padding:12px 16px;
+    background:#4A2B33;color:#FFE3DA;box-shadow:0 10px 30px -10px rgba(0,0,0,.7);
+  }
+  /* Resumen en 2 columnas: la mitad de alto */
+  .resumen{padding:14px var(--s2);gap:12px 16px;margin-bottom:var(--s3);grid-template-columns:1fr 1fr}
+  .resumen div{flex-direction:column;gap:2px}
+  .resumen span:first-child{font-size:.72rem}
+  .resumen span:last-child{font-size:1.02rem;text-align:left}
+  .fields{gap:var(--s2)}
+  .field span{font-size:.8rem}
+  .field input,.field textarea{min-height:54px;padding:12px 16px;font-size:16px}
+  .fallback a{border-bottom:0;text-decoration:underline;text-underline-offset:4px}
   .foot__grid{grid-template-columns:1fr;gap:var(--s4)}
   .foot__bar{flex-direction:column;text-align:center}
   .hero__facts{gap:var(--s3)}
@@ -565,13 +625,6 @@ h4{font-size:1.08rem;letter-spacing:.06em;text-transform:uppercase}
   .card__flag{top:-12px;left:var(--s3)}
   .note{margin-top:var(--s4);font-size:.98rem}
 
-  /* Turnos: días en 4 columnas, más bajos, para llegar rápido a los horarios */
-  .days{grid-template-columns:repeat(4,1fr);gap:8px}
-  .day{min-height:76px;padding:8px 4px}
-  .day b{font-size:1.6rem}
-  .day u,.day s{font-size:.72rem;letter-spacing:.08em}
-  .slots{grid-template-columns:repeat(3,1fr);gap:8px}
-
   /* Áreas táctiles de 44px en links sueltos */
   .barber__ig{display:inline-block;padding:10px 0}
   .fallback a,.info a{display:inline-block;padding:10px 2px}
@@ -600,7 +653,8 @@ h4{font-size:1.08rem;letter-spacing:.06em;text-transform:uppercase}
   h1{font-size:2.55rem}
   .hero__facts span{font-size:.66rem}
   .card__top{flex-direction:column;gap:2px}
-  .days{grid-template-columns:repeat(3,1fr)}
+  .slots{grid-template-columns:repeat(3,1fr)}
+  .steps__i{font-size:.72rem}
 }
 
 @media(prefers-reduced-motion:reduce){
