@@ -162,14 +162,28 @@ h4{font-size:1.08rem;letter-spacing:.06em;text-transform:uppercase}
 .hero__facts span{font-size:.95rem;letter-spacing:.1em;text-transform:uppercase;color:var(--azul);font-weight:600}
 
 .hero__art{position:relative;display:grid;place-items:center}
-.hero__disc{
-  width:min(500px,82vw);aspect-ratio:1;border-radius:50%;
-  background:var(--crema);border:4px solid var(--azul);
-  display:grid;place-items:center;overflow:hidden;box-shadow:var(--sombra);
+/* Foto en arco (eco del espejo redondo del local) + mascota como sticker */
+.hero__photo{
+  width:min(440px,78vw);aspect-ratio:4/5;border-radius:999px 999px var(--radio) var(--radio);
+  overflow:hidden;border:4px solid var(--azul);background:var(--azul-noche);box-shadow:var(--sombra);
+}
+.hero__photo img{width:100%;height:100%;object-fit:cover;object-position:center 62%}
+.hero__sticker{
+  position:absolute;left:max(0px,calc(50% - 300px));bottom:6%;
+  width:clamp(120px,15vw,170px);aspect-ratio:1;border-radius:50%;
+  background:var(--crema);border:4px solid var(--azul);overflow:hidden;
+  display:grid;place-items:center;box-shadow:var(--sombra);
   animation:bob 6s ease-in-out infinite;
 }
-@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
-.hero__disc img{width:94%;height:94%;object-fit:contain;object-position:center bottom}
+.hero__sticker img{width:92%;height:92%;object-fit:contain;object-position:center bottom}
+@keyframes bob{0%,100%{transform:translateY(0) rotate(-4deg)}50%{transform:translateY(-12px) rotate(2deg)}}
+.hero__badge{
+  position:absolute;right:max(0px,calc(50% - 270px));top:12%;
+  background:var(--crema);color:var(--azul-noche);border:2px solid var(--azul);
+  font-family:var(--display);font-weight:700;font-size:1rem;padding:10px 18px;border-radius:999px;
+  box-shadow:var(--sombra);transform:rotate(3deg);transition:transform var(--trans);
+}
+@media(hover:hover){.hero__badge:hover{transform:rotate(0) scale(1.05)}}
 
 .spark{position:absolute;background:var(--azul);animation:twinkle 3.4s ease-in-out infinite}
 .spark::before,.spark::after{content:"";position:absolute;inset:0;background:inherit}
@@ -241,6 +255,23 @@ h4{font-size:1.08rem;letter-spacing:.06em;text-transform:uppercase}
 }
 .solo__ph img{width:100%;height:100%;object-fit:cover;transition:transform .6s var(--trans)}
 @media(hover:hover){.solo__ph:hover img{transform:scale(1.06)}}
+.solo__ph--mascota{background:var(--crema)}
+.solo__ph--mascota img{object-fit:contain;object-position:center bottom;padding:var(--s3) var(--s3) 0}
+
+/* ─── Cortes reales (videos) ─── */
+.reels{display:grid;grid-template-columns:repeat(5,1fr);gap:var(--s2)}
+.reel{position:relative;border-radius:var(--radio);overflow:hidden;aspect-ratio:9/16;background:#0b1828;border:2px solid rgba(247,232,204,.25)}
+.reel video{width:100%;height:100%;object-fit:cover;display:block}
+.reel figcaption{
+  position:absolute;left:0;right:0;bottom:0;padding:40px 14px 14px;
+  background:linear-gradient(transparent,rgba(10,22,36,.85));
+  font-family:var(--display);font-weight:700;font-size:1.02rem;color:var(--crema-luz);line-height:1.2;
+}
+.reel::before{
+  content:"Real";position:absolute;top:12px;left:12px;z-index:1;
+  font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  background:var(--crema);color:var(--azul-noche);padding:4px 10px;border-radius:999px;
+}
 .solo__txt h3{font-size:clamp(2rem,4vw,2.8rem);color:var(--crema-luz);margin-bottom:6px}
 .solo__rol{
   font-family:var(--display);font-weight:700;font-size:.86rem;letter-spacing:.16em;
@@ -250,7 +281,7 @@ h4{font-size:1.08rem;letter-spacing:.06em;text-transform:uppercase}
 .barber__ig{font-family:var(--display);font-weight:700;color:var(--crema);border-bottom:2px solid var(--crema-sec);padding-bottom:2px}
 
 /* ─── Galería ─── */
-.gal{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--s2);grid-auto-rows:260px}
+.gal{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--s2);grid-auto-rows:260px;grid-auto-flow:dense}
 .gal__i{overflow:hidden;border-radius:var(--radio-sm);background:var(--azul-10)}
 .gal__i img{width:100%;height:100%;object-fit:cover;transition:transform .7s var(--trans)}
 .gal__i--tall{grid-row:span 2}
@@ -433,6 +464,13 @@ h4{font-size:1.08rem;letter-spacing:.06em;text-transform:uppercase}
   .gal{grid-template-columns:repeat(2,1fr);grid-auto-rows:170px}
   .gal__i--wide{grid-column:span 2}
   .gal__i--tall{grid-row:span 2}
+  .reels{
+    grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:min(62vw,260px);
+    overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:var(--s2);
+    margin-inline:-4vw;padding-inline:4vw;scrollbar-width:none;
+  }
+  .reels::-webkit-scrollbar{display:none}
+  .reel{scroll-snap-align:center}
   .solo{grid-template-columns:1fr;gap:var(--s4);max-width:560px}
   .solo__bio{max-width:none}
 }

@@ -56,8 +56,9 @@
 
     <nav class="nav__links" id="navLinks" aria-label="Navegación principal">
       <a href="#servicios">Servicios</a>
+      <a href="#cortes">Cortes</a>
       <a href="#barberos">Barberos</a>
-      <a href="#galeria">Trabajos</a>
+      <a href="#galeria">El local</a>
       <a href="#visitanos">Visitanos</a>
       <a href="#turnos" class="btn btn--sm btn--azul">Reservar turno</a>
     </nav>
@@ -90,11 +91,13 @@
     </div>
 
     <div class="hero__art reveal">
-      <div class="hero__disc">
-        <!-- EDITAR: recorte provisorio de la lámina de marca.
-             Reemplazar por la mascota original en PNG con fondo transparente. -->
-        <img src="assets/mascota.png" alt="Mascota de Club Zeta Barbería sosteniendo una máquina de cortar">
+      <figure class="hero__photo">
+        <img src="assets/local/sillones.webp" alt="Sillones de Club Zeta con las capas de la barbería, frente a la pared azul" width="1000" height="1333" fetchpriority="high">
+      </figure>
+      <div class="hero__sticker">
+        <img src="assets/mascota.png" alt="Mascota de Club Zeta Barbería">
       </div>
+      <a href="#cortes" class="hero__badge">▶ Mirá cortes reales</a>
       <span class="spark spark--1" aria-hidden="true"></span>
       <span class="spark spark--2" aria-hidden="true"></span>
       <span class="spark spark--3" aria-hidden="true"></span>
@@ -154,6 +157,44 @@
   </div>
 </section>
 
+<!-- ══════════ CORTES REALES ══════════ -->
+<section class="sec sec--noche" id="cortes">
+  <div class="wrap">
+    <header class="sec__head reveal">
+      <p class="eyebrow eyebrow--luz">Recién salidos de la silla</p>
+      <h2>Así salen del club</h2>
+      <p class="sec__sub sec__sub--luz">Clientes reales, filmados en el local al terminar. Sin filtros ni retoques.</p>
+    </header>
+
+    <div class="reels">
+      <figure class="reel reveal">
+        <video src="assets/cortes/corte-1.mp4" poster="assets/cortes/corte-1.jpg" muted loop playsinline preload="none" aria-label="Video de un corte texturizado con barba perfilada"></video>
+        <figcaption>Crop texturizado + barba</figcaption>
+      </figure>
+      <figure class="reel reveal">
+        <video src="assets/cortes/corte-2.mp4" poster="assets/cortes/corte-2.jpg" muted loop playsinline preload="none" aria-label="Video de un taper fade con flequillo"></video>
+        <figcaption>Taper fade + flequillo</figcaption>
+      </figure>
+      <figure class="reel reveal">
+        <video src="assets/cortes/corte-3.mp4" poster="assets/cortes/corte-3.jpg" muted loop playsinline preload="none" aria-label="Video de un mid fade con textura arriba"></video>
+        <figcaption>Mid fade + textura</figcaption>
+      </figure>
+      <figure class="reel reveal">
+        <video src="assets/cortes/corte-4.mp4" poster="assets/cortes/corte-4.jpg" muted loop playsinline preload="none" aria-label="Video de un taper con diseño de línea"></video>
+        <figcaption>Taper con diseño</figcaption>
+      </figure>
+      <figure class="reel reveal">
+        <video src="assets/cortes/corte-5.mp4" poster="assets/cortes/corte-5.jpg" muted loop playsinline preload="none" aria-label="Video de un taper bajo visto desde la nuca"></video>
+        <figcaption>Taper bajo · nuca</figcaption>
+      </figure>
+    </div>
+
+    <div class="center reveal">
+      <a href="#turnos" class="btn btn--crema btn--lg">Quiero el mío · Reservar</a>
+    </div>
+  </div>
+</section>
+
 <!-- ══════════ BARBEROS ══════════ -->
 <section class="sec sec--azul" id="barberos">
   <div class="wrap">
@@ -163,9 +204,9 @@
     </header>
 
     <div class="solo">
-      <div class="solo__ph reveal">
-        <!-- EDITAR: reemplazar por una foto real de Joaco en assets/ -->
-        <img src="https://picsum.photos/seed/zeta-joaco/700/840" alt="Joaco, barbero y fundador de Club Zeta" loading="lazy">
+      <div class="solo__ph solo__ph--mascota reveal">
+        <!-- EDITAR: cuando haya foto real de Joaco, reemplazar y sacar la clase solo__ph--mascota -->
+        <img src="assets/mascota.png" alt="Mascota de Club Zeta, inspirada en Joaco" loading="lazy">
       </div>
 
       <div class="solo__txt reveal">
@@ -186,18 +227,18 @@
 <section class="sec" id="galeria">
   <div class="wrap">
     <header class="sec__head reveal">
-      <p class="eyebrow">Portfolio</p>
-      <h2>Trabajos del club</h2>
-      <p class="sec__sub">Todo lo que sale de la silla, también sale en Instagram.</p>
+      <p class="eyebrow">El local</p>
+      <h2>El club por dentro</h2>
+      <p class="sec__sub">Sillón Chesterfield, tragamonedas, arcade y café mientras esperás. Venir a cortarte también es un plan.</p>
     </header>
 
-    <!-- EDITAR: reemplazar por fotos reales de @clubzeta_ en assets/galeria/ -->
     <div class="gal">
-      <figure class="gal__i gal__i--tall reveal"><img src="https://picsum.photos/seed/zg1/700/1000" alt="Corte fade realizado en Club Zeta" loading="lazy"></figure>
-      <figure class="gal__i reveal"><img src="https://picsum.photos/seed/zg2/700/700" alt="Perfilado de barba en Club Zeta" loading="lazy"></figure>
-      <figure class="gal__i reveal"><img src="https://picsum.photos/seed/zg3/700/700" alt="Corte con diseño en Club Zeta" loading="lazy"></figure>
-      <figure class="gal__i gal__i--wide reveal"><img src="https://picsum.photos/seed/zg4/1000/700" alt="Interior de la barbería Club Zeta" loading="lazy"></figure>
-      <figure class="gal__i reveal"><img src="https://picsum.photos/seed/zg5/700/700" alt="Decoloración y color en Club Zeta" loading="lazy"></figure>
+      <figure class="gal__i gal__i--tall reveal"><img src="assets/local/living.webp" alt="Living de espera con sillón de cuero, espejo redondo y tragamonedas vintage" loading="lazy" style="object-position:center 80%"></figure>
+      <figure class="gal__i reveal"><img src="assets/local/capas.webp" alt="Capas de Club Zeta sobre los sillones de corte" loading="lazy" style="object-position:center 60%"></figure>
+      <figure class="gal__i reveal"><img src="assets/local/poste.webp" alt="Poste de barbería en la entrada" loading="lazy"></figure>
+      <figure class="gal__i reveal"><img src="assets/local/fachada.webp" alt="Fachada de Club Zeta con banco en la vereda" loading="lazy"></figure>
+      <figure class="gal__i gal__i--wide reveal"><img src="assets/local/espejo-arcade.webp" alt="Espejo redondo que refleja el arcade y la pared azul" loading="lazy" style="object-position:center 55%"></figure>
+      <figure class="gal__i reveal"><img src="assets/local/escalera.webp" alt="Barra, escalera de hierro y jardín vertical del entrepiso" loading="lazy"></figure>
     </div>
 
     <div class="center reveal">
@@ -354,8 +395,8 @@
     <div>
       <h4>Navegá</h4>
       <a href="#servicios">Servicios</a>
-      <a href="#barberos">Barberos</a>
-      <a href="#galeria">Trabajos</a>
+      <a href="#cortes">Cortes</a>
+      <a href="#galeria">El local</a>
       <a href="#turnos">Reservar turno</a>
     </div>
 

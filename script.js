@@ -408,3 +408,13 @@ $('#okReset').addEventListener('click', () => {
 pintarOpciones();
 pintarDias();
 $('#slots').innerHTML = '<p class="slots__msg">Elegí un día para ver los horarios.</p>';
+
+/* ── Videos de cortes: se reproducen solo cuando están en pantalla ── */
+const reducir = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const obsVid = new IntersectionObserver((entradas) => {
+  entradas.forEach(({ target: v, isIntersecting }) => {
+    if (isIntersecting && !reducir) { v.preload = 'auto'; v.play().catch(() => {}); }
+    else v.pause();
+  });
+}, { threshold: 0.4 });
+$$('.reel video').forEach(v => obsVid.observe(v));
