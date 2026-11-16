@@ -362,6 +362,8 @@
               <span>¿Algo que tengamos que saber?</span>
               <textarea name="notas" id="f_notas" rows="3" placeholder="Ej: quiero fade bajo y la barba prolija"></textarea>
             </label>
+            <!-- Campo trampa anti-bots: invisible para personas -->
+            <input type="text" name="web" id="f_web" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
           </div>
 
           <p class="mini">Al confirmar aceptás nuestra política de cancelación: avisanos con 2 horas de anticipación si no podés venir.</p>
@@ -375,7 +377,7 @@
         <!-- Éxito -->
         <div class="pane pane--ok" data-pane="ok">
           <div class="ok__tick" aria-hidden="true">✓</div>
-          <h3>¡Turno confirmado!</h3>
+          <h3 id="okTit">¡Turno confirmado!</h3>
           <p id="okTxt"></p>
           <div class="ok__btns">
             <a class="btn btn--crema" id="okWa" href="#" target="_blank" rel="noopener">Avisar por WhatsApp</a>

@@ -3,18 +3,16 @@
    ──────────────────────────────────────────────
    TODO lo configurable vive en CONFIG. No hace falta
    tocar nada más abajo para cambiar precios, horarios,
-   servicios, barberos o webhooks.
+   servicios, barberos o la URL de turnos.
    ════════════════════════════════════════════════ */
 
 const CONFIG = {
 
-  /* ── Webhooks de n8n ───────────────────────────
-     EDITAR: reemplazar por las URLs reales cuando el
-     workflow esté activo en n8n (ver INTEGRACIONES.md).
-     Si se dejan vacías, el sitio funciona igual y cae
-     al fallback de WhatsApp.                         */
-  webhookTurno: '',          // POST — crea el turno (Calendar + Sheets)
-  webhookDisponibilidad: '', // GET  — devuelve horarios ya ocupados
+  /* ── Sistema de turnos (Google Apps Script) ─────
+     EDITAR: pegar acá la URL de la app web que termina en /exec
+     (ver apps-script/INSTALAR.md). Si queda vacía, la web pide
+     confirmar cada turno por WhatsApp.                    */
+  turnosUrl: '',
 
   whatsapp: '5491125997840',
   zonaHoraria: '-03:00',     // Argentina
@@ -210,18 +208,25 @@ function generarSlots(iso, duracion) {
   return slots;
 }
 
+/* Devuelve los tramos ocupados del día: [{ ini:'15:00', fin:'15:45' }, …] */
 async function traerOcupados(iso) {
-  if (!CONFIG.webhookDisponibilidad) return [];
+  if (!CONFIG.turnosUrl) return [];
   try {
-    const params = new URLSearchParams({ fecha: iso, barbero: estado.barbero?.id || '' });
-    const r = await fetch(`${CONFIG.webhookDisponibilidad}?${params}`, { headers:{ 'Accept':'application/json' } });
+    const params = new URLSearchParams({ accion: 'ocupados', fecha: iso });
+    const r = await fetch(`${CONFIG.turnosUrl}?${params}`);
     if (!r.ok) throw new Error(r.status);
     const data = await r.json();
-    return Array.isArray(data) ? data : (data.ocupados || []);
+    return data.ocupados || [];
   } catch (e) {
     console.warn('[Club Zeta] No se pudo leer la disponibilidad:', e);
-    return [];   // ante la duda, mostramos todo y el barbero confirma
+    return [];   // ante la duda, mostramos todo: el servidor igual revisa al confirmar
   }
+}
+
+/* Un horario está tomado si el turno (de la duración del servicio) pisa algún tramo ocupado */
+function chocan(hora, duracion, ocupados) {
+  const ini = aMin(hora), fin = ini + duracion;
+  return ocupados.some(o => ini < aMin(o.fin) && fin > aMin(o.ini));
 }
 
 async function pintarSlots() {
@@ -231,16 +236,18 @@ async function pintarSlots() {
 
   cont.innerHTML = '<p class="slots__msg">Buscando horarios…</p>';
 
+  const pedido = estado.fecha + estado.servicio.id;   // por si cambian de día mientras carga
   const libres = generarSlots(estado.fecha, estado.servicio.min);
   const ocupados = await traerOcupados(estado.fecha);
+  if (pedido !== estado.fecha + estado.servicio.id) return;
 
-  if (!libres.length) {
+  if (!libres.length || libres.every(h => chocan(h, estado.servicio.min, ocupados))) {
     cont.innerHTML = '<p class="slots__msg">No quedan horarios para ese día. Probá con otro.</p>';
     return;
   }
 
   cont.innerHTML = libres.map(h => {
-    const tomado = ocupados.includes(h);
+    const tomado = chocan(h, estado.servicio.min, ocupados);
     return `<button type="button" class="slot" role="radio" aria-checked="false" data-hora="${h}"
              ${tomado ? 'disabled aria-label="' + h + ', ocupado"' : ''}>${h}</button>`;
   }).join('');
@@ -354,20 +361,35 @@ form.addEventListener('submit', async (ev) => {
   btn.disabled = true;
   btn.textContent = 'Reservando…';
 
+  turno.web = $('#f_web')?.value || '';   // campo trampa anti-bots
+
   try {
-    if (CONFIG.webhookTurno) {
-      const r = await fetch(CONFIG.webhookTurno, {
+    if (CONFIG.turnosUrl) {
+      // text/plain evita el "preflight" CORS, que Apps Script no responde
+      const r = await fetch(CONFIG.turnosUrl, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
         body: JSON.stringify(turno),
       });
       if (!r.ok) throw new Error('HTTP ' + r.status);
+      const res = await r.json();
+      if (!res.ok) {
+        if (res.error === 'ocupado' || res.error === 'ocupado-servidor') {
+          mostrarError('Uy, ese horario se acaba de ocupar. Elegí otro y listo.');
+          btn.disabled = false;
+          btn.textContent = 'Confirmar turno';
+          estado.hora = null;
+          irA(2);
+          pintarSlots();
+          return;
+        }
+        throw new Error('Servidor: ' + res.error);
+      }
+      exito(turno, true);
     } else {
-      // Sin webhook configurado todavía: no perdemos el turno, lo mandamos por WhatsApp.
-      console.warn('[Club Zeta] webhookTurno sin configurar — fallback a WhatsApp.');
-      await new Promise(res => setTimeout(res, 600));
+      // Sin sistema conectado: el turno se confirma por WhatsApp (si no, Joaco no se entera).
+      exito(turno, false);
     }
-    exito(turno);
   } catch (e) {
     console.error('[Club Zeta] Error al reservar:', e);
     mostrarError('No pudimos guardar el turno. Mandanos un WhatsApp al 11 2599 7840 y lo arreglamos en el momento.');
@@ -376,15 +398,25 @@ form.addEventListener('submit', async (ev) => {
   }
 });
 
-function exito(t) {
-  $('#okTxt').textContent =
-    `${t.nombre}, te esperamos el ${fechaLinda(t.fecha)} a las ${t.hora} hs para ${t.servicio.toLowerCase()} con ${t.barbero}. Freire 1015, Colegiales.`;
+function exito(t, guardado) {
+  const cuando = `${fechaLinda(t.fecha)} a las ${t.hora} hs`;
+  if (guardado) {
+    $('#okTit').textContent = '¡Turno confirmado!';
+    $('#okTxt').textContent =
+      `${t.nombre}, te esperamos el ${cuando} para ${t.servicio.toLowerCase()} con ${t.barbero}. Freire 1015, Colegiales.` +
+      (t.email ? ' Te mandamos la confirmación por mail.' : '');
+    $('#okWa').textContent = 'Escribinos por WhatsApp';
+  } else {
+    $('#okTit').textContent = 'Último paso: confirmalo por WhatsApp';
+    $('#okTxt').textContent =
+      `${t.nombre}, mandanos el mensaje ya armado para reservar el ${cuando} (${t.servicio.toLowerCase()}). El turno queda tomado cuando te respondemos.`;
+    $('#okWa').textContent = 'Confirmar por WhatsApp';
+  }
 
-  const msg = `Hola Club Zeta! Reservé un turno por la web:%0A%0A` +
-    `*${t.servicio}* con ${t.barbero}%0A` +
-    `${fechaLinda(t.fecha)} a las ${t.hora} hs%0A` +
-    `A nombre de ${t.nombre}` +
-    (t.notas ? `%0A%0ANota: ${encodeURIComponent(t.notas)}` : '');
+  const msg = encodeURIComponent(
+    `Hola Club Zeta! ${guardado ? 'Reservé' : 'Quiero confirmar'} un turno por la web:\n\n` +
+    `*${t.servicio}* con ${t.barbero}\n${cuando}\nA nombre de ${t.nombre}` +
+    (t.notas ? `\n\nNota: ${t.notas}` : ''));
   $('#okWa').href = `https://wa.me/${CONFIG.whatsapp}?text=${msg}`;
 
   $$('.pane').forEach(p => p.classList.toggle('is-on', p.dataset.pane === 'ok'));
