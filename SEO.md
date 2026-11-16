@@ -10,7 +10,7 @@ Búsquedas objetivo (local): **barbería Colegiales**, barbería en Colegiales C
 | Schema (JSON-LD) | HairSalon básico con URL de un dominio que no existe | HairSalon con descripción, imágenes, rango de precios, pagos, barrios atendidos, mapa, fundador, catálogo de servicios con precios y acción de reserva | Rich results y Google Maps entienden qué, dónde y cuánto |
 | Hero | H1 sin keyword («Tu corte, sin esperar en la puerta») | H1 empieza con «Barbería en Colegiales, CABA» + el slogan; lead con «cortes de pelo para hombre, fade, barba, color» y la dirección | El H1 es la señal on-page más fuerte |
 | Servicios | «Servicios y precios» / «Corte» / «Global» | «Servicios y precios de la barbería» / «Corte de pelo» / «Global (decoloración)» | Términos que la gente busca de verdad |
-| Cortes (videos) | «Así salen del club» | «Cortes de pelo reales: así salen del club» + fade, taper, textura en el subtítulo | Texto indexable alrededor de los videos |
+| Cortes (fotos) | «Así salen del club» | «Cortes de pelo reales: así salen del club» + fade, taper, textura en el subtítulo | Texto indexable y fotos con alt descriptivo |
 | Barbero | «Quién te atiende» | «Tu barbero en Colegiales» + nombre completo Joaquín «Joaco» y especialidades | Entidad (persona) asociada a la marca y al barrio |
 | Galería | «El club por dentro» | «La barbería por dentro» + Colegiales en el texto; alts descriptivos | Búsqueda de imágenes y relevancia local |
 | Turnos | «Pedí tu turno» | «Pedí tu turno online» | Keyword «turno online» |
