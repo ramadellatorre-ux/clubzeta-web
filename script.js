@@ -12,7 +12,7 @@ const CONFIG = {
      EDITAR: pegar acá la URL de la app web que termina en /exec
      (ver apps-script/INSTALAR.md). Si queda vacía, la web pide
      confirmar cada turno por WhatsApp.                    */
-  turnosUrl: '',
+  turnosUrl: 'https://script.google.com/macros/s/AKfycbzScvOhg51AKRWo_nUz7oCQ1wN-KOaFeot4tzoZaDoY9uBIIyR-9luWnbQvhqgRCI6pgg/exec',
 
   whatsapp: '5491125997840',
   zonaHoraria: '-03:00',     // Argentina
