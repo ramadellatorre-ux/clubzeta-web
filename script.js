@@ -38,10 +38,10 @@ const CONFIG = {
 
   /* ── Servicios ── EDITAR duraciones ── */
   servicios: [
-    { id:'corte',      nombre:'Corte',         precio:17000, min:45,  desc:'Tijera o máquina + lavado' },
-    { id:'corte-barba',nombre:'Corte + Barba', precio:19000, min:60,  desc:'El combo completo', destacado:true },
-    { id:'mechas',     nombre:'Mechas',        precio:55000, min:120, desc:'Incluye corte' },
-    { id:'global',     nombre:'Global',        precio:60000, min:150, desc:'Decoloración completa' },
+    { id:'corte',      nombre:'Corte',         precio:18000, min:45,  desc:'Tijera o máquina + lavado' },
+    { id:'corte-barba',nombre:'Corte + Barba', precio:20000, min:60,  desc:'El combo completo', destacado:true },
+    { id:'mechas',     nombre:'Mechas',        precio:60000, min:120, desc:'Incluye corte' },
+    { id:'global',     nombre:'Global',        precio:70000, min:150, desc:'Decoloración completa' },
   ],
 
   /* ── Barberos ──────────────────────────────────

@@ -33,10 +33,10 @@ const AJUSTES = {
 
   // Tienen que coincidir con CONFIG.servicios de script.js (precio y duración mandan los de acá)
   servicios: {
-    'corte':       { nombre: 'Corte',         precio: 17000, min: 45 },
-    'corte-barba': { nombre: 'Corte + Barba', precio: 19000, min: 60 },
-    'mechas':      { nombre: 'Mechas',        precio: 55000, min: 120 },
-    'global':      { nombre: 'Global',        precio: 60000, min: 150 },
+    'corte':       { nombre: 'Corte',         precio: 18000, min: 45 },
+    'corte-barba': { nombre: 'Corte + Barba', precio: 20000, min: 60 },
+    'mechas':      { nombre: 'Mechas',        precio: 60000, min: 120 },
+    'global':      { nombre: 'Global',        precio: 70000, min: 150 },
   },
 };
 
